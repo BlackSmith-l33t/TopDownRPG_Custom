@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - GameManager
   layers:
   - Default
   - TransparentFX
@@ -13,11 +14,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - NPC
+  - Obstacle
+  - Ground
+  - Map
   - 
   - 
   - 
@@ -40,4 +41,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 1
+    uniqueID: 3045724963
+    locked: 0
+  - name: 0
+    uniqueID: 1036589573
     locked: 0
