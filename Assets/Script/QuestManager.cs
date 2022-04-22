@@ -65,7 +65,5 @@ public class QuestManager : MonoBehaviour
         }
 
         curQuests.Progress();
-                
-
     }
 }

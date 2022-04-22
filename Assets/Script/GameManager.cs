@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public void SetDialogContent(string name, string desc)
     {
-        nameText.text = " : " + name;
+        nameText.text = name + " : ";
         descriptionText.text = " - " + desc;
     }
 }

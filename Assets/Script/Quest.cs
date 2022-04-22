@@ -35,7 +35,7 @@ public class Quest : MonoBehaviour
 
     private void Start()
     {
-        OnStart += QuestMana ger.instance.QuestStart;
+        OnStart += QuestManager.instance.QuestStart;
         OnComplete += QuestManager.instance.QuestComplete;
     }
 
@@ -50,13 +50,13 @@ public class Quest : MonoBehaviour
     public void Progress()
     {
         curAmount++;
-        Debug.Log(title + " 가 진행되었습니다. - " + curAmount + "/" + requireAmount);
+        Debug.Log(title + " 가 진행 중입니다. - " + curAmount + "/" + requireAmount);
     }
 
     public void Complete()
     {
         OnComplete?.Invoke(this);
-        bActive = true;
+        bActive = false;
         Debug.Log(title + " 가 완료되었습니다.");
     }
 
@@ -76,9 +76,10 @@ public class Quest : MonoBehaviour
             }
         }
         else if (!bFinish) // 진행 중
-        {
+        {           
             if (curAmount < requireAmount)
             {
+                Debug.Log("퀘스트 진행 중 진입");
                 return progress.ReAction();
             }
             else

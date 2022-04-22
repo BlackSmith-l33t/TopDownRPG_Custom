@@ -16,6 +16,13 @@ public class Conversation : MonoBehaviour, IInteractable
     int converIndex = 0;
 
 
+    private void Awake()
+    {
+        //if (null == GetComponentInParent<GameObject>())
+        //{
+        //    Title = GetComponentInParent<GameObject>().name;
+        //}
+    }
 
     private void Start()
     {
