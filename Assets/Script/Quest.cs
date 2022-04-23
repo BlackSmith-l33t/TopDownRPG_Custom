@@ -18,37 +18,41 @@ public class Quest : MonoBehaviour
     public UnityAction<Quest> OnStart;
     public UnityAction<Quest> OnComplete;
 
-    public bool bActive;  // 퀘스트가 가능한 상황
-    public bool bStart = false;  // 퀘스트가 수락됐을 때
-    public bool bFinish = false;  // 퀘스트가 완료됐을 때
+    public bool isActive;  // 퀘스트가 가능한 상황
+    public bool isStart = false;  // 퀘스트가 수락됐을 때
+    public bool isFinish = false;  // 퀘스트가 완료됐을 때
     public QuestType type;
+    public Coin requirement;
     public string title;
     [TextArea]
-    public string description;
-    public string requirement;
+    public string description;    
     public int curAmount;
     public int requireAmount;
     public int expReward;
     public int goldReward;
 
     public Conversation accept, progress, complete;
+    public Quest[] nextQuest;
+
 
     private void Start()
     {
         OnStart += QuestManager.instance.QuestStart;
         OnComplete += QuestManager.instance.QuestComplete;
+        Coin.OnGlodCollected += Progress;
     }
 
 
     public void Accept()
     {
         OnStart?.Invoke(this);
-        bStart = true;
+        isStart = true;
         Debug.Log(title + " 가 수락되었습니다.");
     }
 
     public void Progress()
     {
+        Debug.Log("골드 + 1");
         curAmount++;
         Debug.Log(title + " 가 진행 중입니다. - " + curAmount + "/" + requireAmount);
     }
@@ -56,13 +60,17 @@ public class Quest : MonoBehaviour
     public void Complete()
     {
         OnComplete?.Invoke(this);
-        bActive = false;
+        isActive = false;
+        foreach(Quest quest in nextQuest)
+        {
+            quest.isActive = true;
+        }
         Debug.Log(title + " 가 완료되었습니다.");
     }
 
     public bool ReAction()
     {
-        if (!bStart) // 수락 전
+        if (!isStart) // 수락 전
         {
             bool reAction = accept.ReAction();
             if (reAction)
@@ -75,7 +83,7 @@ public class Quest : MonoBehaviour
                 return false;
             }
         }
-        else if (!bFinish) // 진행 중
+        else if (!isFinish) // 진행 중
         {           
             if (curAmount < requireAmount)
             {
@@ -84,7 +92,7 @@ public class Quest : MonoBehaviour
             }
             else
             {
-                bFinish = true;
+                isFinish = true;
                 return ReAction();
             }
         }

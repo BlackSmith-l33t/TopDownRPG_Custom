@@ -8,8 +8,8 @@ public class Coin : MonoBehaviour
     public static UnityAction OnGlodCollected;
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("코인 먹음");
         OnGlodCollected?.Invoke();
-        QuestManager.instance.OnItemCollect("Coin");
         Destroy(gameObject);
     }
 }

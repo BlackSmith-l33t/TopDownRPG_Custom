@@ -13,7 +13,7 @@ public class PlayerMover : MonoBehaviour
     float hSpeed;
 
     // 0 : 위, 1 : 오른쪽, 2 : 아래, 3: 왼쪽
-    int iDirection = 2;
+    int iDirection = 0;
     Vector2 dirVec;
 
     bool isActing = false;
@@ -28,7 +28,7 @@ public class PlayerMover : MonoBehaviour
     {
         Move();
         Action();
-    }
+    }  
 
     private void Move()
     {
@@ -41,7 +41,7 @@ public class PlayerMover : MonoBehaviour
         anim.SetFloat("vSpeed", vSpeed);
         anim.SetFloat("hSpeed", hSpeed);
         Vector2 moveVec = new Vector2(hSpeed, vSpeed);
-        anim.SetBool("bMove", moveVec.sqrMagnitude > 0.01f);
+        anim.SetBool("isMove", moveVec.sqrMagnitude > 0.01f);
 
         // 마지막으로 보고 있었던 방향 구하기
         if (Input.GetButtonDown("Vertical"))
@@ -72,7 +72,7 @@ public class PlayerMover : MonoBehaviour
                 // 왼쪽 눌렀을 때
                 iDirection = 3;
                 dirVec = Vector2.left;
-            }
+            } 
         }
         anim.SetInteger("iDirection", iDirection);
 

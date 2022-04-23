@@ -20,3 +20,4 @@ public class GameManager : MonoBehaviour
         descriptionText.text = " - " + desc;
     }
 }
+ 

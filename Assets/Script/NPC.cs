@@ -19,7 +19,7 @@ public class NPC : MonoBehaviour, IInteractable
         // 1. 가능한 퀘스트가 있으면 퀘스트 진행
         foreach (Quest quest in quests)
         {
-            if (quest.bActive)
+            if (quest.isActive)
             {
                 return quest.ReAction();
             }

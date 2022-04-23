@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestManager : MonoBehaviour
-{
+{    
     private static QuestManager _instance;
     public static QuestManager instance
     {
@@ -13,7 +14,10 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    Quest curQuests;
+    public GameObject UI;
+    public Text title;
+    public Text description;
+    private Quest curQuests;
 
     private void Awake()
     {
@@ -24,7 +28,18 @@ public class QuestManager : MonoBehaviour
     {
         if  (Input.GetKeyDown(KeyCode.Q))
         {
-            
+            if (null != curQuests)
+            {
+                title.text = curQuests.title;
+                description.text = curQuests.description;
+            }
+            else
+            {
+                title.text = "퀘스트 없음";
+                description.text = "퀘스트 없음";
+            }
+
+            UI.SetActive(!UI.activeSelf);
         }
     }
     public void QuestStart(Quest quest)
@@ -34,8 +49,7 @@ public class QuestManager : MonoBehaviour
         Debug.Log("퀘스트 이름 : " + quest.title);
         Debug.Log("퀘스트 설명 : " + quest.description);
 
-        curQuests = quest;
-        Coin.OnGlodCollected += curQuests.Progress;
+        curQuests = quest;        
     }
 
     public void QuestComplete(Quest quest)
@@ -43,27 +57,25 @@ public class QuestManager : MonoBehaviour
         // 보상 진행
         Debug.Log("퀘스트 완료");
         Debug.Log("퀘스트 보상 골드 : " + quest.goldReward);
-        Debug.Log("퀘스트 보상 경험치 : " + quest.expReward);
-        
-        Coin.OnGlodCollected -= curQuests.Progress;
-        curQuests = null;
+        Debug.Log("퀘스트 보상 경험치 : " + quest.expReward);    
+       
+        curQuests = null; 
     }
 
-    public void OnItemCollect(string itemName)
+    public void OnItemCollect(ICollectable itemName)
     {
         if (null == curQuests)
         {
             return; 
-        }
+        } 
         if (curQuests.type != QuestType.COLLECT)
         {
             return;
         }
-        if (curQuests.requirement != itemName)
-        {
-            return;
-        }
 
+        Debug.Log("QuestComplete 호출");
         curQuests.Progress();
+
+        
     }
 }
