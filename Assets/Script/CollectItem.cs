@@ -14,11 +14,18 @@ public class CollectItem : MonoBehaviour
     {
         QuestManager.instance.OnItemCollect(name);
         // 아이템 변환 작업
+        if (InventoryManager.instance.Add(data))
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Debug.Log("아이템이 가득 찼습니다."); 
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         Collect();
-        Destroy(gameObject);
     }
 }

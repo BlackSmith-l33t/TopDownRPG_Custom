@@ -14,6 +14,16 @@ public class NPC : MonoBehaviour, IInteractable
         quests = GetComponentsInChildren<Quest>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            GameObject obj = InventoryManager.instance.items[0].prefab;
+            Instantiate(obj, new Vector2(0, 0), Quaternion.identity);
+            InventoryManager.instance.items[0].Remove();
+        }
+    }
+
     public bool ReAction()
     {
         // 1. 가능한 퀘스트가 있으면 퀘스트 진행

@@ -14,16 +14,23 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public InventoryUI UI;
+    public List<ItemData> items = new List<ItemData>();
+    public int maxSize = 20;
 
     private void Awake()
     {
         _instance = this;
     }
 
-    public List<ItemData> items = new List<ItemData>();
-
-    public int maxSize = 20;
-
+    private void Update()
+    {
+        if (Input.GetButtonDown("InventoryUI"))
+        {
+            UI.gameObject.SetActive(!UI.gameObject.activeSelf);
+            UI.UpdateUI();
+        }
+    }
     public bool Add(ItemData item)
     {
         if (items.Count >= maxSize)
@@ -31,11 +38,13 @@ public class InventoryManager : MonoBehaviour
             return false;
         }
         items.Add(item);
+        UI.UpdateUI();
         return true;
     }
 
-    public void Remove()
+    public void Remove(ItemData item )
     {
-
+        items.Remove(item);
+        UI.UpdateUI();
     }
 }

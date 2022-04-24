@@ -26,7 +26,7 @@ public class QuestManager : MonoBehaviour
 
     private void Update()
     {
-        if  (Input.GetKeyDown(KeyCode.Q))
+        if  (Input.GetButtonDown("QuestUI"))
         {
             if (null != curQuests)
             {
@@ -73,7 +73,7 @@ public class QuestManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("QuestComplete 호출");
+        Debug.Log("OnItemCollect 호출");
         curQuests.Progress();
 
         
