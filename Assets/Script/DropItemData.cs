@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DropData", menuName = "Data/DropData")]
+[CreateAssetMenu(fileName = "Drop Item", menuName = "Data/DropItem")]
 public class DropItemData : ItemData
 {
     public override void Use()

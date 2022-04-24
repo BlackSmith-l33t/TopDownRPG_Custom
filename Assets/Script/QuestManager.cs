@@ -62,7 +62,7 @@ public class QuestManager : MonoBehaviour
         curQuests = null; 
     }
 
-    public void OnItemCollect(ICollectable itemName)
+    public void OnItemCollect(string itemName)
     {
         if (null == curQuests)
         {
