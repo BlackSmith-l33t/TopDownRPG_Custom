@@ -57,8 +57,10 @@ public class QuestManager : MonoBehaviour
         // 보상 진행
         Debug.Log("퀘스트 완료");
         Debug.Log("퀘스트 보상 골드 : " + quest.goldReward);
-        Debug.Log("퀘스트 보상 경험치 : " + quest.expReward);    
-       
+        Debug.Log("퀘스트 보상 경험치 : " + quest.expReward);
+
+        // TODO : 인베토리가 가득 찼으면 넣을 수 없게 해야함.
+        InventoryManager.instance.Add(quest.itemReward); 
         curQuests = null; 
     }
 

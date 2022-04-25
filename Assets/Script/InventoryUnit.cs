@@ -25,4 +25,10 @@ public class InventoryUnit : MonoBehaviour
         icon.enabled = false;
         button.interactable = false;
     }
+
+    public void UseItem()
+    {
+        Debug.Log(curItemData.name + "가 사용되었습니다.");
+        curItemData.Use(); 
+    }
 }

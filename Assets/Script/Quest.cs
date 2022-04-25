@@ -28,6 +28,7 @@ public class Quest : MonoBehaviour
     public string description;    
     public int curAmount;
     public int requireAmount;
+    public ItemData itemReward;
     public int expReward;
     public int goldReward;
 
